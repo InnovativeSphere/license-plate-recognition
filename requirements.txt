@@ -1,0 +1,6 @@
+opencv-python
+easyocr
+pydantic
+Pillow
+requests
+numpy

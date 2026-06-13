@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026_06_13_02_06_02",
+  "plate": "XYZ456NG",
+  "owner": "John Doe",
+  "photo": "https://i.pravatar.cc/150?img=2",
+  "isWanted": true,
+  "confidence": 0.9742,
+  "is_unknown": false
+}

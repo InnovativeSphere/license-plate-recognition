@@ -1,0 +1,74 @@
+[
+  {
+    "plate": "ABC123NG",
+    "owner": "Salim Ahmed",
+    "photo": "https://i.pravatar.cc/150?img=1",
+    "isWanted": false
+  },
+  {
+    "plate": "XYZ456NG",
+    "owner": "John Doe",
+    "photo": "https://i.pravatar.cc/150?img=2",
+    "isWanted": true
+  },
+  {
+    "plate": "KLM789NG",
+    "owner": "Fatima Bello",
+    "photo": "https://i.pravatar.cc/150?img=5",
+    "isWanted": false
+  },
+  {
+    "plate": "QRS012NG",
+    "owner": "Chinedu Okafor",
+    "photo": null,
+    "isWanted": false
+  },
+  {
+    "plate": "TUV345NG",
+    "owner": "Aisha Yusuf",
+    "photo": "https://i.pravatar.cc/150?img=9",
+    "isWanted": true
+  },
+  {
+    "plate": "WXY678NG",
+    "owner": "Emeka Nwachukwu",
+    "photo": "https://i.pravatar.cc/150?img=12",
+    "isWanted": false
+  },
+  {
+    "plate": "ZAB901NG",
+    "owner": "Grace Adeyemi",
+    "photo": null,
+    "isWanted": false
+  },
+  {
+    "plate": "CDE234NG",
+    "owner": "David Okonkwo",
+    "photo": "https://i.pravatar.cc/150?img=3",
+    "isWanted": false
+  },
+  {
+    "plate": "FGH567NG",
+    "owner": "Ngozi Eze",
+    "photo": "https://i.pravatar.cc/150?img=10",
+    "isWanted": false
+  },
+  {
+    "plate": "IJK890NG",
+    "owner": "Yusuf Ibrahim",
+    "photo": null,
+    "isWanted": true
+  },
+  {
+    "plate": "LMN123NG",
+    "owner": "Blessing Obi",
+    "photo": "https://i.pravatar.cc/150?img=11",
+    "isWanted": false
+  },
+  {
+    "plate": "OPQ456NG",
+    "owner": "Musa Abubakar",
+    "photo": "https://i.pravatar.cc/150?img=8",
+    "isWanted": false
+  }
+]
