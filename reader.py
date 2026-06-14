@@ -1,7 +1,9 @@
 """
 reader.py — OCR engine for the License Plate Recognition System.
 Uses EasyOCR to extract text from a cropped plate image.
-Returns the cleaned plate string and confidence score.
+Merges multiple text regions (left‑to‑right), removes hyphens,
+and truncates to a maximum of 8 characters for standard plate formats.
+Returns the cleaned plate string and average confidence score.
 """
 
 import easyocr
@@ -23,7 +25,7 @@ def read_plate(plate_image: np.ndarray) -> Tuple[Optional[str], Optional[float]]
 
     Returns:
         (plate_text, confidence) if successful,
-        (None, None) if the text could not be read or confidence is too low.
+        (None, None) if no text found or confidence is too low.
     """
     if plate_image is None or plate_image.size == 0:
         return None, None
@@ -31,25 +33,34 @@ def read_plate(plate_image: np.ndarray) -> Tuple[Optional[str], Optional[float]]
     # 1. Preprocess – enhance contrast and binarize
     clean_plate = preprocess_for_ocr(plate_image)
 
-    # 2. Run OCR
+    # 2. Run OCR – get ALL detected text regions
     results = _reader.readtext(clean_plate)
 
     if not results:
         return None, None
 
-    # 3. Extract the result with the highest confidence
-    best_result = max(results, key=lambda r: r[2])  # r[2] is confidence
-    raw_text = best_result[1]
-    confidence = best_result[2]
+    # 3. Sort results left‑to‑right by the x‑coordinate of the bounding box
+    results.sort(key=lambda r: r[0][0][0])
 
-    # 4. Clean the text: uppercase, remove non‑alphanumeric except hyphens
-    cleaned = ''.join(c for c in raw_text.upper() if c.isalnum() or c == '-').strip()
+    # 4. Extract and merge all detected text strings
+    raw_parts = [r[1] for r in results]
+    merged_text = ''.join(raw_parts)
+
+    # 5. Clean the merged text: uppercase, remove non‑alphanumeric (including hyphens)
+    cleaned = ''.join(c for c in merged_text.upper() if c.isalnum()).strip()
 
     if not cleaned:
         return None, None
 
-    # 5. Confidence filter
-    if confidence < settings.detection_confidence:
+    # 6. Enforce maximum 8 characters (standard plate length)
+    if len(cleaned) > 8:
+        cleaned = cleaned[:8]
+
+    # 7. Average confidence across all detected regions
+    avg_confidence = sum(r[2] for r in results) / len(results)
+
+    # 8. Confidence filter
+    if avg_confidence < settings.detection_confidence:
         return None, None
 
-    return cleaned, confidence
+    return cleaned, avg_confidence
